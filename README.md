@@ -14,25 +14,25 @@ Para comenzar, por favor ejecute los siguientes comandos: <br />
 <hr />
 Este proyecto utiliza graphQl con Lighthouse, para realizar las pruebas correspondientes puede dirigirse a <strong>http://127.0.0.1:8000/graphql-playground</strong> y realizar la siguiente consulta: <br />
 {
-  shipment(id: 20) {
-    id
-    delivery_address
-    delivery_date
-    status
-    products {
-      id
-      quantity
-      active {
-        name
-        description
-        price
-      }
-    }
-    client {
-      name
-    }
-  }
-}
+  shipment(id: 20) {<br />
+    id<br />
+    delivery_address<br />
+    delivery_date<br />
+    status<br />
+    products {<br />
+      id<br />
+      quantity<br />
+      active {<br />
+        name<br />
+        description<br />
+        price<br />
+      }<br />
+    }<br />
+    client {<br />
+      name<br />
+    }<br />
+  }<br />
+}<br />
 <hr />
 El repositorio de consumo de API será provisto en el correo, para dividir Backend y FrontEnd<br />
 Gracias por su atención y tiempo
