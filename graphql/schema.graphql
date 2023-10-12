@@ -1,0 +1,62 @@
+"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+"Indicates what fields are available at the top level of a query operation."
+type Query {
+    "Find a single user by an identifying attribute."
+    client(
+      id: ID @eq 
+      email: String @eq
+    ): Client @find
+
+    "List multiple users."
+    clients(
+      "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
+      name: String @where(operator: "like")
+    ): [Client!]! @paginate(defaultCount: 10)
+
+    shipment(
+      id: ID @eq
+      code: String @eq
+    ): Shipment @find
+
+    shipments(
+      code: String @where(operator: "like")
+    ): [Shipment!]! @paginate(defaultCount: 10)
+}
+
+
+type Client {
+  id: ID!
+  name: String!
+  document_type: String!
+  document: String!
+  email: String!
+  phone: String!
+  shipments: [Shipment!]! @hasMany
+}
+
+type Active {
+  id: ID!
+  name: String!
+  description: String!
+  price: Int!
+  products: [Product!]! @hasMany
+}
+
+type Shipment {
+  id: ID!
+  code: String!
+  delivery_address: String!
+  status: String!
+  delivery_date: DateTime!
+  client: Client! @belongsTo
+  products: [Product!]! @hasMany
+}
+
+type Product {
+  id: ID!
+  quantity: Int!
+  active: Active! @belongsTo
+  shipment: Shipment! @belongsTo
+}
